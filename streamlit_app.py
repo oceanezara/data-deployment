@@ -57,20 +57,11 @@ mean_per_checking_type = data.groupby(['checkin_type'])['delay_at_checkout_in_mi
 st.write(mean_per_checking_type)
 
 avg_checking_type_df = data.groupby(['checkin_type']).mean()
-
-bar_fig = plt.figure(figsize=(8,7))
-
-bar_ax = bar_fig.add_subplot(111)
-
 sub_avg_breast_cancer_df = avg_checking_type_df[["delay_at_checkout_in_minutes"]]
-
-sub_avg_breast_cancer_df.plot.bar(alpha=0.8, ax=bar_ax,)
-st.pyplot(bar_fig)
-
+st.bar_chart(sub_avg_breast_cancer_df)
 
 st.markdown("***")
 st.write('**Type of cars and state of booking distributions:**')
-
 
 pie = make_subplots(rows=1, cols=2, specs=[[{"type": "domain"}, {"type": "domain"}]],shared_yaxes = True, 
                     subplot_titles=["Type of cars", "State of booking"])
