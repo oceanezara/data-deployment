@@ -12,10 +12,11 @@ from plotly.subplots import make_subplots
 st.set_page_config(
     page_title="GetAround Delay",
     page_icon=':blue_car:',
+    layout="wide"
 )
 DATA = "get_around_delay_analysis.xlsx"
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def load_data():
     data = pd.read_excel(DATA)
     return data
@@ -50,6 +51,8 @@ data['delay_at_checkout_in_minutes'] = data[mask]['delay_at_checkout_in_minutes'
 # Mean per checking type
 st.markdown("***")
 st.write('**Average delay per checking type in minutes :**')
+
+
 mean_per_checking_type = data.groupby(['checkin_type'])['delay_at_checkout_in_minutes'].mean()
 st.write(mean_per_checking_type)
 
@@ -61,8 +64,9 @@ bar_ax = bar_fig.add_subplot(111)
 
 sub_avg_breast_cancer_df = avg_checking_type_df[["delay_at_checkout_in_minutes"]]
 
-sub_avg_breast_cancer_df.plot.bar(alpha=0.8, ax=bar_ax, )
+sub_avg_breast_cancer_df.plot.bar(alpha=0.8, ax=bar_ax,)
 st.pyplot(bar_fig)
+
 
 st.markdown("***")
 st.write('**Type of cars and state of booking distributions:**')
@@ -149,8 +153,9 @@ st.plotly_chart(fig_pie)
 
 st.write(data_delta_not_null.groupby(['checkin_type', 'state'])['time_delta_with_previous_rental_in_minutes'].describe())
 
-st.markdown("***")
-st.write('**Which share of our owner’s revenue would potentially be affected by the feature How many rentals would be affected by the feature depending on the threshold and scope we choose?**')
+st.write('')
+st.write('')
+st.subheader('3)Which share of our owner’s revenue would potentially be affected ?')
 
 threshold = st.select_slider('Choose a threshold on Connect feature only: ', options=[60, 240, 570, 720])
 
@@ -166,13 +171,21 @@ mask_ended_new = data_delta_not_null_new['state'] == 'ended'
 
 diff = data_delta_not_null[mask_connect & mask_ended]['state'].count() - data_delta_not_null_new[mask_connect_new & mask_ended_new]['state'].count()
 
-st.write('It will potentially affect ', ((diff/data.shape[0])*100).round(2), "% of owner's revenue")
+st.write('It will potentially affect ', ((diff/data.shape[0])*100).round(2), "% of our owner's revenue for a threshold of ", threshold,"minutes.")
 
+st.subheader('4)How many problematic cases will it solve depending on the chosen threshold and scope? ?')
 
+mask_canceled = data_delta_not_null['state'] == 'canceled'
+mask_canceled_new = data_delta_not_null_new['state'] == 'canceled'
 
+diff2 = data_delta_not_null[mask_canceled]['state'].count() - data_delta_not_null_new[mask_canceled_new]['state'].count()
 
+st.write('It will potentially resolve ', diff2, " of problematic cases for a threshold of ",threshold ,"minutes.")
 
+st.subheader('5) How often are drivers late for the next check-in?')
 
+count_delay = (data_delta_not_null['delay_at_checkout_in_minutes'] > 0).sum()
 
+st.write('Delays represent ', ((count_delay /data.shape[0])*100).round(2),'% of total check-outs.')
 
 
