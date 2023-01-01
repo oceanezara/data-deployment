@@ -17,6 +17,8 @@ if __name__ == "__main__":
 
     print("training model...")
     start_time = time.time()
+       # Call mlflow autolog
+    mlflow.sklearn.autolog()
 
     # Set your variables for your environment
     EXPERIMENT_NAME="price_car"
