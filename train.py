@@ -27,15 +27,20 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 if __name__ == "__main__":
 
-    print("training model...")
-    start_time = time.time()
-
    # Set your variables for your environment
     EXPERIMENT_NAME="price_car"
     # Set experiment's info 
     mlflow.set_experiment(EXPERIMENT_NAME)
     # Get our experiment info
     experiment = mlflow.get_experiment_by_name(EXPERIMENT_NAME)
+
+    print("training model...")
+    
+    # Time execution
+    start_time = time.time()
+
+    # Call mlflow autolog
+    mlflow.sklearn.autolog()
 
     df = pd.read_csv("./get_around_pricing_project.csv")
     df = df.iloc[: , 1:]
