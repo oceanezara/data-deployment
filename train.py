@@ -31,7 +31,7 @@ if __name__ == "__main__":
     start_time = time.time()
 
     EXPERIMENT_NAME="price_car"
-    mlflow.set_tracking_uri(os.environ["MLFLOW_TRACKING_URI"])
+    mlflow.set_tracking_uri("https://mlflow-oceane.herokuapp.com/")
     mlflow.sklearn.autolog() 
     mlflow.set_experiment(EXPERIMENT_NAME)
     experiment = mlflow.get_experiment_by_name(EXPERIMENT_NAME)
