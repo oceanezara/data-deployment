@@ -48,21 +48,26 @@ def categorie(x):
 
 numeric_features, categorical_features = categorie(x)
 
+categorical_transformer = Pipeline(
+    steps=[
+    ('encoder', OneHotEncoder(drop='first', handle_unknown='ignore'))
+    ])
+
 numeric_transformer = Pipeline(steps=[
-        ('scaler', StandardScaler())
-        ])
-categorical_transformer = Pipeline(steps=[
-        ('encoder', OneHotEncoder(drop='first', handle_unknown='ignore')) 
-        ])
+    ('scaler', StandardScaler())
+])
+
 preprocessor = ColumnTransformer(
-        transformers=[
-            ('num', numeric_transformer, numeric_features),
-            ("cat", categorical_transformer, categorical_features)
-        ])
-    
-pipe = Pipeline(steps=[("Preprocessing", preprocessor),
-                        ("Regressor", LinearRegression())
-                            ]) 
+    transformers=[
+        ('num', numeric_transformer, numeric_features),
+        ('cat', categorical_transformer, categorical_features)
+    ])
+
+# Preprocessings on train set
+x_train = preprocessor.fit_transform(x_train)
+
+# Preprocessings on test set
+x_test = preprocessor.transform(x_test) 
 
 with mlflow.start_run() as run:
 
