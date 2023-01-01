@@ -1,4 +1,4 @@
-name: californian_housing_market
+name: price_car
 docker_env:
   image: jedha/sample-mlflow-server
   volumes: ["$(pwd):/home/app"]
