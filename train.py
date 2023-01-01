@@ -30,10 +30,11 @@ if __name__ == "__main__":
     print("training model...")
     start_time = time.time()
 
+   # Set your variables for your environment
     EXPERIMENT_NAME="price_car"
-    mlflow.set_tracking_uri("https://mlflow-oceane.herokuapp.com/")
-    mlflow.sklearn.autolog() 
+    # Set experiment's info 
     mlflow.set_experiment(EXPERIMENT_NAME)
+    # Get our experiment info
     experiment = mlflow.get_experiment_by_name(EXPERIMENT_NAME)
 
     df = pd.read_csv("./get_around_pricing_project.csv")
