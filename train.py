@@ -7,6 +7,8 @@ from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler, OneHotEncoder 
 from sklearn.model_selection import train_test_split
+from mlflow.models.signature import infer_signature
+
 
 if __name__ == "__main__":
 
@@ -69,10 +71,12 @@ x_train = preprocessor.fit_transform(x_train)
 # Preprocessings on test set
 x_test = preprocessor.transform(x_test) 
 
-with mlflow.start_run() as run:
+with mlflow.start_run(experiment_id = experiment.experiment_id):
 
     model = LinearRegression()
     model.fit(x_train, y_train)
+
+    predictions = model.predict(x_train)
 
     mlflow.log_metric("Train Score", model.score(x_train, y_train))
     mlflow.log_metric("Test Score", model.score(x_test, y_test))
@@ -80,7 +84,8 @@ with mlflow.start_run() as run:
     mlflow.sklearn.log_model(
         sk_model=model,
         artifact_path="price_car",
-        registered_model_name="price_car_model"
+        registered_model_name="price_car_model",
+        signature=infer_signature(x_train, predictions)
     )
     
 print("...Training Done!")
