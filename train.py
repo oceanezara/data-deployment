@@ -95,52 +95,7 @@ if __name__ == "__main__":
             signature=infer_signature(x_train, predictions)
         )
 
-    # joblib.dump(model, "model.joblib")
 
     print("...Done!")
     print(f"---Total training time: {time.time()-start_time}")
-
-# df = pd.read_csv("./get_around_pricing_project.csv")
-# df = df.iloc[: , 1:]
-
-# target = "rental_price_per_day"
-
-# x = df.drop(target, axis=1)
-
-# y = df.loc[:,target]
-
-# x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state=0)
-
-# def categorie(x):
-#     numeric_features = []
-#     categorical_features = []
-#     for i,t in x.dtypes.items():
-#         if ('float' in str(t)) or ('int' in str(t)) :
-#             numeric_features.append(i)
-#         else :
-#             categorical_features.append(i)
-#     return numeric_features, categorical_features
-
-# numeric_features, categorical_features = categorie(x)
-
-# categorical_transformer = Pipeline(
-#     steps=[
-#     ('encoder', OneHotEncoder(drop='first', handle_unknown='ignore'))
-#     ])
-
-# numeric_transformer = Pipeline(steps=[
-#     ('scaler', StandardScaler())
-# ])
-
-# preprocessor = ColumnTransformer(
-#     transformers=[
-#         ('num', numeric_transformer, numeric_features),
-#         ('cat', categorical_transformer, categorical_features)
-#     ])
-
-# # Preprocessings on train set
-# x_train = preprocessor.fit_transform(x_train)
-
-# # Preprocessings on test set
-# x_test = preprocessor.transform(x_test) 
 
