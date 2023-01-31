@@ -53,9 +53,9 @@ class PredictionFeatures(BaseModel):
 @app.get("/", tags=["Introduction Endpoints"])
 async def index():
     """
-    Renvoie simplement un message de bienvenue !
+    This returns a welcome message !
     """
-    message = "Bonjour! Ce `/` est le point de terminaison le plus simple et par défaut. Si vous voulez en savoir plus, consultez la documentation de l'API sur `/docs`"
+    message = "Hello! This is the default endpoint. You can go to /docs to get an overview of all available endpoints"
     return message
 
 @app.post("/predict", tags=["Machine Learning"])
@@ -66,7 +66,7 @@ async def predict(predictionFeatures: PredictionFeatures):
    
     price_day = pd.DataFrame(dict(predictionFeatures), index=[0])
                             
-    logged_model = 'runs:/d2489a417f6f4003bf1c1ee1758874de/price_car'
+    logged_model = 'runs:/febae56268394b318c6c1b41f40d2791/price_car'
 
     loaded_model = mlflow.pyfunc.load_model(logged_model)
 
