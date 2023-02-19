@@ -1,14 +1,9 @@
-# data-deployment
+email : oceanezara@yahoo.fr
 
-#Model 
-````
-import mlflow
-logged_model = 'runs:/d2489a417f6f4003bf1c1ee1758874de/price_car'
+lien présentation projet : 
 
-# Load model as a PyFuncModel.
-loaded_model = mlflow.pyfunc.load_model(logged_model)
+lien dashboard streamlit : https://streamlit-dashboard.herokuapp.com/
 
-# Predict on a Pandas DataFrame.
-import pandas as pd
-loaded_model.predict(pd.DataFrame(data))
-```
+lien mlflow : https://mlflow-oceane.herokuapp.com/
+
+lien API : https://fast-api-101.herokuapp.com/docs#/
