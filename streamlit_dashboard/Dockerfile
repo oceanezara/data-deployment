@@ -9,3 +9,5 @@ RUN apt install curl -y
 
 RUN pip install pandas streamlit sklearn plotly numpy openpyxl
 COPY . /home/app
+
+CMD streamlit run --server.port $PORT streamlit_app.py
