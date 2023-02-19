@@ -55,8 +55,8 @@ mean_per_checking_type = data.groupby(['checkin_type'])['delay_at_checkout_in_mi
 st.write(mean_per_checking_type)
 
 avg_checking_type_df = data.groupby(['checkin_type']).mean()
-sub_avg_breast_cancer_df = avg_checking_type_df[["delay_at_checkout_in_minutes"]]
-st.bar_chart(sub_avg_breast_cancer_df)
+sub_avg_checking_type_df = avg_checking_type_df[["delay_at_checkout_in_minutes"]]
+st.bar_chart(sub_avg_checking_type_df)
 
 st.markdown("***")
 st.write('**Type of cars and state of booking distributions:**')
