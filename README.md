@@ -1,5 +1,7 @@
 email : oceanezara@yahoo.fr
 
+CNI : https://share.vidyard.com/watch/WCkeZ42FtREN8AdrrWqHXZ?
+
 lien présentation projet : https://share.vidyard.com/watch/bfYWPeR6tA79DwGws2GRWa?
 
 lien dashboard streamlit : https://streamlit-dashboard.herokuapp.com/
